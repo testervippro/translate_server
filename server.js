@@ -1,10 +1,11 @@
+require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 3000;  // Use Render's provided port
 
-const API_KEY = 'AIzaSyCI9ZV3RqLZ3_C5TcZsRb7X87U0yMc4zQ4';  // Replace with your Google Translate API Key
+const API_KEY = process.env.API_KEY; // Replace with your Google Translate API Key
 
 // Allow requests from any domain (e.g., GitHub Pages or other domains)
 app.use(cors({
