@@ -6,7 +6,13 @@ const port = process.env.PORT || 3000;  // Use Render's provided port
 
 const API_KEY = 'AIzaSyCI9ZV3RqLZ3_C5TcZsRb7X87U0yMc4zQ4';  // Replace with your Google Translate API Key
 
-app.use(cors());
+// Allow requests from any domain (e.g., GitHub Pages or other domains)
+app.use(cors({
+    origin: '*',  // This allows all domains to make requests to your server.
+    methods: ['GET', 'POST'],  // Allow both GET and POST methods
+    allowedHeaders: ['Content-Type'],  // Allow specific headers (you can add more if needed)
+}));
+
 app.use(express.json());
 
 app.post('/translate', async (req, res) => {
