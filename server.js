@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -11,8 +10,14 @@ const API_KEY = process.env.API_KEY; // Replace with your Google Translate API K
 app.use(cors({
     origin: '*',  // This allows all domains to make requests to your server.
     methods: ['GET', 'POST'],  // Allow both GET and POST methods
-    allowedHeaders: ['Content-Type'],  // Allow specific headers (you can add more if needed)
+    allowedHeaders: ['Content-Type'],  // Allow specific headers
 }));
+
+// Add Content Security Policy (CSP) to allow connections to the specified API
+app.use((req, res, next) => {
+    res.setHeader('Content-Security-Policy', "default-src 'self'; connect-src 'self' https://translate-server-n0g5.onrender.com;");
+    next();
+});
 
 app.use(express.json());
 
